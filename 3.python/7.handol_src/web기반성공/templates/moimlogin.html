@@ -1,0 +1,49 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>모임 로그인</title> 
+
+<style type="text/css">
+<!--
+body {
+	background-color: #4D2A8B;
+}
+-->
+</style>
+</head>
+<body>
+<form NAME="loginForm" id="loginForm" method="POST" action="/login">
+<input type="hidden" name="accessToken" id="accessToken">
+ <table width="800" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>&nbsp;</td>
+    <td width="397" height="768" background={{static_url("img/webs/phone.gif")}}><table width="397" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td height="155" colspan="2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="220" colspan="2" align="center" valign="middle"><img src={{static_url("img/webs/title01.gif")}} width="237" height="149" /></td>
+      </tr>
+      <tr>
+        <td width="120" height="35" align="right" valign="middle"><img src={{static_url("img/webs/text01.gif")}} width="29" height="15" /></td>
+        <td width="277" align="left" valign="middle" style="padding-left:10px"><input type="text" name="userID" id="userID" />
+        </td>
+      </tr>
+      <tr>
+        <td width="120" height="35" align="right" valign="middle"><img src={{static_url("img/webs/text02.gif")}} width="29" height="15" /></td>
+        <td width="277" height="35" align="left" valign="middle" style="padding-left:10px"><input type="password" name="userPWD" id="userPWD" style="width:155px" onkeydown="javascript:if(event.keyCode==13) loginForm.submit()"/>
+        </td>
+      </tr>
+      <tr>
+        <td height="140" colspan="2" align="center" valign="middle"><a href="javascript:loginForm.submit()"><img src={{static_url("img/webs/btn01.gif")}} width="221" height="59" border=0/></a></td>
+      </tr>
+      <tr>
+        <td height="183" colspan="2" align="center" valign="middle">&nbsp;</td>
+      </tr>
+    </table></td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</form>
+</body>
+</html>

@@ -1,0 +1,29 @@
+>>> 성공 케이스
+https://m2.wagle.me/v3.0/account/login?userId=handola&userPw=f3e9e6e4ac00b618302b2218ea51407e38b8ad91
+--> https://m2.wagle.me/v3.0/account/login?userId=handola&userPw=f3e9e6e4ac00b618302b2218ea51407e38b8ad91
+{'App-agent': 'Etc;Etc;Etc;petloves;1.0;Etc;LAN', 'Host': 'm2.wagle.me', 'Content-type': 'application/x-www-form-urlencoded', 'Akey': '8R8A+JiT1AMxzSZZw/irpuRZnN0=#Ng==', 'Accept': '*/*'}
+{"resultCode":0,"resultMsg":"성공","loginInfo":{"acesToken":"HnkTD0VF8Qu3vba41Kh2wWgvXJg=","agreeYn":"N","clusYn":"N","deviAuthYn":"N","newVersYn":"N","pnsToken":" ","userSeq":26459}}
+TOKEN, USERSEQ HnkTD0VF8Qu3vba41Kh2wWgvXJg=#MjY0NTk= 26459
+
+
+>>> appkey 오류 케이스
+https://m2.wagle.me/v3.0/account/login?userId=handola&userPw=f3e9e6e4ac00b618302b2218ea51407e38b8ad91
+--> https://m2.wagle.me/v3.0/account/login?userId=handola&userPw=f3e9e6e4ac00b618302b2218ea51407e38b8ad91
+{'App-agent': 'Etc;Etc;Etc;petloves;1.0;Etc;LAN', 'Host': 'm2.wagle.me', 'Content-type': 'application/x-www-form-urlencoded', 'Akey': '7R8A+JiT1AMxzSZZw/irpuRZnN0=#Ng==', 'Accept': '*/*'}
+<-- error HTTP Error 401: Unauthorized
+{"resultMsg":"인증되지 않은 요청입니다.","resultCode":1005}
+
+
+>>> ID/passwd 오류 케이스
+https://m2.wagle.me/v3.0/account/login?userId=handola&userPw=2e9beae7c19a463a2fa07a7227c98775b0117f95
+--> https://m2.wagle.me/v3.0/account/login?userId=handola&userPw=2e9beae7c19a463a2fa07a7227c98775b0117f95
+{'App-agent': 'Android;Android OS2.1.2;01080805909;petloves;1.0;SHW-M130L;WiFi', 'Host': 'm2.wagle.me', 'Content-type': 'application/x-www-form-urlencoded', 'Akey': '8R8A+JiT1AMxzSZZw/irpuRZnN0=#Ng==', 'Accept': '*/*'}
+{"resultMsg":"아이디, 비밀번호를 다시 한번 확인해 주세요.","resultCode":2045}
+
+
+>>> 와글 가입한 전화번호 및 UDID(iphone) 오류 케이스
+https://m2.wagle.me/v3.0/account/login?userId=handola&userPw=f3e9e6e4ac00b618302b2218ea51407e38b8ad91
+--> https://m2.wagle.me/v3.0/account/login?userId=handola&userPw=f3e9e6e4ac00b618302b2218ea51407e38b8ad91
+{'App-agent': 'Android;Android OS2.1.2;01080805908;petloves;1.0;SHW-M130L;WiFi', 'Host': 'm2.wagle.me', 'Content-type': 'application/x-www-form-urlencoded', 'Akey': '8R8A+JiT1AMxzSZZw/irpuRZnN0=#Ng==', 'Accept': '*/*'}
+{"resultMsg":"회원가입시 등록된 단말인증번호와 다릅니다.[01080805909]","resultCode":2015}
+

@@ -1,0 +1,21 @@
+##### 로그인 성공 케이스 ####
+URL: https://m2.wagle.me/v3.0/account/login?userId=handola&userPw=f3e9e6e4ac00b618302b2218ea51407e38b8ad91
+Login Success !!
+RESULTCODE: 0
+JSON MESG: {u'resultCode': 0, u'resultMsg': u'\uc131\uacf5', u'loginInfo': {u'pnsToken': u' ', u'clusYn': u'N', u'acesToken': u'Ex89zcQrkXxa6rlF/PabCVuMBC4=', u'newVersYn': u'N', u'tchrYn': u'N', u'userSeq': 26459, u'agreeYn': u'N', u'deviAuthYn': u'N'}}
+
+
+
+##### 로그인 실패 케이스 ####
+URL: https://m2.wagle.me/v3.0/account/login?userId=handola&userPw=b19774778cfaa2e7dba70016deb3c31eaedec052
+Login Fail !! ID 및 password를 확인하세요.
+RESULTCODE: 2045
+JSON MESG: {u'resultCode': 2045, u'resultMsg': u'\uc544\uc774\ub514, \ube44\ubc00\ubc88\ud638\ub97c \ub2e4\uc2dc \ud55c\ubc88 \ud655\uc778\ud574 \uc8fc\uc138\uc694.'}
+
+
+##### 회원 가입 시간 조회 ####
+URL: https://m2.wagle.me/v3.0/account/showUserJoin/handola
+JOIN TIME: 1297846353
+CURR TIME: 1316747422
+==> 가입한지 72시간이 초과하였습니다
+JSON MESG: {u'resultCode': 0, u'resultMsg': u'\uc131\uacf5', u'userJoinDttm': 1297846353000L, u'userJoinYn': u'Y'}
