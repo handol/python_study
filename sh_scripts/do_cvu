@@ -1,0 +1,28 @@
+#!/bin/csh
+
+cd ~/script/Log
+touch ~/script/Log/src_count
+cd ~/dev/HLRSVC/src/slp/gsm_call
+date >> ~/script/Log/src_count
+wc *.[ch] >> ~/script/Log/src_count
+
+cd ~/dev
+
+cd HLRHOME
+cvs update -d -P
+cd ..
+
+foreach i (OAM UALIB UANGIN HLRSVC)
+echo $i
+cd $i
+	#cvs status >& /dev/null
+	foreach j (include src libsrc local external_inc SIM)
+		if (-e $j) then
+			cd $j
+			cvs update -d -P
+			cd ..
+		endif
+
+	end
+cd ..
+end

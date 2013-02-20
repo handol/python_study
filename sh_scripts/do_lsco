@@ -1,0 +1,30 @@
+#!/usr/bin/csh
+
+set path = (/opt/rational/clearcase/bin $path)
+
+set vname = `cleartool lsview -cview -short`
+echo "*** VIEW = " $vname "***"
+
+set dirs = (\
+	~/dahee_UAHLR_REL_0_7/hlrsvc/HLRSVC\
+	~/dahee_UAHLR_REL_0_7/hlrsvc/HLRSVC/src/slp/gsm\
+	~/dahee_UAHLR_REL_0_7/hlrsvc/HLRSVC/src/slp/gmap\
+	~/dahee_UAHLR_REL_0_7/hlrsvc/HLRSVC/src/dbserv/hlrdb\
+	~/dahee_UAHLR_REL_0_7/uangin/UANGIN\
+	~/dahee_UAHLR_REL_0_7/ualib/UALIB\
+)
+
+set dirs = ~/dahee_UAHLR_REL_0_7/hlrsvc/HLRSVC/src/slp/gsm
+
+set users = (dahee dry bhtak jdlee fresh200 pinetr2e gura srini phanish)
+foreach dir ($dirs)
+echo "==== " $dir " ===="
+cd $dir
+
+	foreach u ($users)
+		echo "  -- " $u
+		cleartool lsco $1 -user $u
+	end
+end
+
+echo "*** VIEW = " $vname "***"

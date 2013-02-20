@@ -1,0 +1,61 @@
+#!/usr/bin/env python
+import os, sys, os.path
+
+
+if len(sys.argv) < 2:
+	print "Enter Source file or Object file"
+	sys.exit()
+
+## SRC file
+ns = sys.argv[1].split('.')
+if len(ns)==1:
+	Cfile = sys.argv[1]+'.c'
+	Ofile = sys.argv[1]+'.o'
+	Lfile = sys.argv[1]+'.log'
+
+elif len(ns)==2:
+	Cfile = ns[0]+'.c'
+	Ofile = ns[0]+'.o'
+	Lfile = ns[0]+'.log'
+
+else:
+	print "wrong file name"
+	sys.exit()
+
+
+
+## DIR
+cwd = os.getcwd()
+#print cwd
+dirtree = cwd.split('/')
+#print dirtree
+
+found=-1
+n = len(dirtree)
+for i in range(n):
+	if dirtree[n-i-1].isupper(): found = n-i-1; break
+
+if found < 0: 
+	print "Dir name must contain some upper name. ex) HLRSVC, UANGIN"
+	sys.exit()
+
+newtree = dirtree[found+1:]
+#print newtree
+
+n = len(newtree)
+target=''
+for i in range(n):
+	if i==0:
+		target += '\\<'+newtree[i]
+	else:
+		target += '\\!'+newtree[i]
+target += '\\>'
+target += Ofile
+#print target
+
+print "jam -q %s" % (target)
+print "jam -q %s >& %s" % (target, Lfile)
+print "more", Lfile
+
+#os.system(r"jam -q %s >& %s" % (target, Lfile) )
+#os.system(r"jam -q %s" % (target) )

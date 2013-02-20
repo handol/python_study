@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+import sys, os
+import mysync
+from time import gmtime, strftime
+arglen=len(sys.argv);
+if arglen < 2:
+	print "Usage : ",sys.argv[0], " sourceDir"
+	sys.exit();
+
+
+fExtList = "*.c,*.h,*.py,*.script,*.conf,*Jamfile,*cshrc*"
+fExtList = "*"
+
+pList = mysync.extList(fExtList)
+srcList = mysync.walktree(sys.argv[1], pList, [], len(sys.argv[1]), prn=0)
+srcList.sort()
+
+print strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
+
+for n in srcList:
+	#print n[0], n[1], n[2], " "*(30-len(n[0])), strftime("%Y/%m/%d %H:%M:%S", gmtime(n[2]) )
+	print n[0], " "*(30-len(n[0])), n[1],"\t", strftime("%Y/%m/%d %H:%M:%S", gmtime(n[2] ) )

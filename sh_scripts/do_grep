@@ -1,0 +1,4 @@
+#grep -n -i -E "uaLog.+(vlr|msc|imsi|isdn|lmsi|picc|ircarr|sgsn|ggsn)"
+grep -n -i -E "uaLog.+(vlr|msc|imsi|isdn|lmsi|picc|ircarr|sgsn|ggsn)" */*.c | grep "%U" | grep -v Ext
+
+grep -n -i -E "_trace.+(vlr|msc|imsi|isdn|lmsi|picc|ircarr|sgsn|ggsn)" */*.c | grep "%U" | grep -v Ext

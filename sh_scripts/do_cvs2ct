@@ -1,0 +1,61 @@
+#!/usr/local/bin/tcsh
+
+if ($#argv != 1) then
+	echo "usage: $0 comment"
+	exit
+endif
+
+#echo "$argv[0] $argv[1]"
+echo $0 $1
+
+set files =  `grep -v "#" ~/script/do_myfiles`
+
+set tmpfile=/tmp/$user.cvs2ct
+cat /dev/null > $tmpfile
+
+set CT=~/dev/hlrsvc/HLRSVC/
+set CVS=~/CVS/HLRSVC/
+echo source=$CVS target=$CT
+
+foreach i ($files)
+		set df = `diff  $CT$i $CVS$i | wc -l`
+		#echo "df = " $df
+		if ( $df != "0" ) then
+		echo $i >> $tmpfile
+		endif
+end
+
+set files=`cat $tmpfile`
+
+
+echo "=== Files"
+echo $files
+
+
+echo
+echo -n "Enter any key to continue..."
+set a = $<
+echo $a
+
+set path = (/opt/rational/clearcase/bin $path)
+
+
+foreach i ($files) 
+	echo "SRC: " `ls -l $CVS$i `
+	echo "TRG: " `ls -l $CT$i  `
+	echo -n  "Enter [y/n] "
+
+	set a = $<
+	if ( $a == "y" ) then
+		echo "=== Check Out"
+		cleartool co -c $1 $CT$i
+		/bin/cp  $CVS$i $CT$i
+		echo $CVS$i "-->" $CT$i
+		#echo "=== Check In"
+		#cleartool ci -nc $CT$i
+
+	else
+		echo "skipped"
+	endif
+
+end

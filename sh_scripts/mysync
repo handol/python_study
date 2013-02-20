@@ -1,0 +1,75 @@
+#!/usr/bin/env python
+import sys
+import mysync
+
+def helpmsg():
+	print "Usage : ",sys.argv[0], " sourceDir targetDir [copy]"
+	print "-m sourceDir filename :: make a list of files in 'sourceDir' and save to 'filename"
+	print "-l sourceDirFile targetDir [copy] :: load a list of files in 'sourceDir' and compare it with targetDir"
+	sys.exit();
+
+#### main
+
+srcDir=""
+trgDir=""
+copyFlag=""
+fExtList = "*.c,*.h,*.py,*.script,*.conf,*Jamfile,*cshrc*,*.sch,*.l,*.y"
+
+arglen=len(sys.argv)
+if arglen < 3: helpmsg()
+pList = mysync.extList(fExtList)
+
+#print arglen, sys.argv
+#sys.exit()
+
+if arglen == 5 and sys.argv[4]=='root':
+	rootonly = 1
+else:
+	rootonly = 0
+
+prn = 0
+
+if sys.argv[1][0]=='-':
+	if sys.argv[1][1]=='m' and arglen==4:
+		srcList = mysync.walktree(sys.argv[2], pList, [], len(sys.argv[2]), prn, rootonly)
+		srcList.sort()
+		mysync.prnList(srcList, sys.argv[3], "### %s ###" % sys.argv[2])
+		sys.exit()
+	elif sys.argv[1][1]=='l' and arglen>=4:
+		trgDir=sys.argv[3]
+		if arglen>4: copyFlag = sys.argv[4]
+	else:
+		helpmsg()
+else:
+	srcDir=sys.argv[1]
+	trgDir=sys.argv[2]
+	if arglen>3: copyFlag = sys.argv[3]
+
+if srcDir!="":
+	print "======= SOURCE ========"
+	srcList = mysync.walktree(srcDir, pList, [], len(srcDir), prn, rootonly)
+	srcList.sort()
+else:
+	srcDir, srcList = mysync.readList(sys.argv[2])
+
+if trgDir!="":
+	print "======= TARGET ========"
+	trgList = mysync.walktree(trgDir, pList, [], len(trgDir), prn, rootonly)
+	trgList.sort()
+
+"""
+print "======= SRC ========"
+for e in srcList: print e
+print "======= TRG ========"
+for e in trgList: print e
+print "======= END ========"
+"""
+mysync.prnList(srcList, "111", "src")
+mysync.prnList(trgList, "222", "trg")
+
+if copyFlag=="copy": docopy=1
+else: docopy=0
+
+print "======= COMPARE: %s  %s  ========" %(srcDir, trgDir)
+mysync.cmpList(srcDir, trgDir, srcList, trgList, debug=0, docopy=docopy)
+

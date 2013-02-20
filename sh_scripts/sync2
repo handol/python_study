@@ -1,0 +1,18 @@
+#!/bin/csh
+
+~/script/mysync  ~/dev//UANGIN/src/pcb/ ~/CVS/HLRSVC/UANGIN/src/pcb/ copy root
+~/script/mysync  ~/dev//UANGIN/src/slee/ ~/CVS/HLRSVC/UANGIN/src/slee/ copy root
+~/script/mysync  ~/dev//UANGIN/src/ATIF/ ~/CVS/HLRSVC/UANGIN/src/ATIF/ copy root
+~/script/mysync ~/dev//UANGIN/include/ ~/CVS/HLRSVC/UANGIN/include/ copy root
+/bin/cp  ~/dev//UANGIN/include/hlr/encdec-toed-hpux64.h ~/CVS/HLRSVC/UANGIN/include/hlr/
+chmod u+w ~/CVS/HLRSVC/UANGIN/include/hlr/encdec-toed-hpux64.h
+
+~/script/mysync ~/dev//UALIB/src/common/ ~/CVS/HLRSVC/UALIB/src/common/ copy root
+~/script/mysync ~/dev//UALIB/src/MMDB/sql/ ~/CVS/HLRSVC/UALIB/src/MMDB/sql/ copy root
+~/script/mysync ~/dev//UALIB/include/ ~/CVS/HLRSVC/UALIB/include/ copy root
+
+/bin/cp -p ~/dev//ASN/HLR/*.asn ~/CVS/HLRSVC/ASN/
+/bin/cp -p ~/dev//ASN/HLR/*.txt ~/CVS/HLRSVC/ASN/
+/bin/cp -p ~/dev//ASN/HLR/encdec-hpux64.c ~/CVS/HLRSVC/ASN/
+chmod u+w ~/CVS/HLRSVC/ASN/*
+

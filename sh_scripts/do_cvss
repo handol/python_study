@@ -1,0 +1,3 @@
+cd ~/HLRSVC; pwd; cvs status > /dev/null
+cd ~/UALIB; pwd; cvs status > /dev/null
+cd ~/UANGIN; pwd; cvs status > /dev/null

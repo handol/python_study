@@ -1,0 +1,9 @@
+#!/usr/bin/csh
+
+set files =  `grep -v "#" ~/script/do_myfiles`
+
+cd ~/dahee_UAHLR_REL_0_6/hlrsvc/HLRSVC/
+foreach i ($files) 
+echo $i
+/bin/cp $i ~/clearcase_back/
+end

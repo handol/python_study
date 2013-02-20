@@ -1,0 +1,69 @@
+#!/usr/bin/csh
+#SHELL=/usr/bin/csh
+	source ~/script/ctenv
+
+	cd ~/dev/HLRSVC/libsrc/schema; jam 
+
+	cd ~/dev/HLRSVC/libsrc/;  jam;  jam install
+
+	cd ~/dev/UALIB; jam install 
+
+	cd ~/dev/UANGIN/src/pcb; jam 
+	cd ~/dev/UANGIN/src/pcb; ./opdata 
+	cd ~/dev/UANGIN/src/pcb; /bin/cp -p *.acn *.dat *.err ~/hlr/data
+	cd ~/dev/UANGIN/src/slee; jam
+	cd ~/dev/UANGIN/src/slee; jam install
+	sleep 1
+	cd ~/dev/UANGIN/src/; jam install
+	cd ~/dev/UANGIN/src/; jam install
+	cd ~/dev/UANGIN; jam install
+
+
+
+
+	cd  ~/dev/HLRSVC/src/slp/gsm_call; jam 
+	cd  ~/dev/HLRSVC/src/slp/gsm_call; jam install
+
+	cd  ~/dev/HLRSVC/src/slp/gsm_locu; jam 
+	cd  ~/dev/HLRSVC/src/slp/gsm_locu; jam install
+
+	cd  ~/dev/HLRSVC/src/slp/gsm_auth; jam 
+	cd  ~/dev/HLRSVC/src/slp/gsm_auth; jam install
+
+	cd  ~/dev/HLRSVC/src/slp/gsm; jam  install
+	cd  ~/dev/HLRSVC/src/slp/gmap; jam  install
+
+	cd  ~/dev/HLRSVC/src/slp/; jam 
+	cd  ~/dev/HLRSVC/src/slp/; jam install
+
+	cd  ~/dev/HLRSVC/src/ne/tiisib; jam 
+	cd  ~/dev/HLRSVC/src/ne/tiisib; jam install
+
+	cd ~/dev/HLRSVC; jam install
+
+
+
+	cd ~/dev/HLRHOME/data/MML_INFO; /bin/cp -rp * ~/hlr/data/MML_INFO
+	cd ~/dev/HLRHOME/data/USR_INFO; /bin/cp -rp * ~/hlr/data/USR_INFO
+	cd ~/dev/HLRHOME/data/; ./gen_initsql.sh
+	cd ~/dev/HLRHOME/data/; /bin/cp * ~/hlr/data/
+	cd ~/hlr/data
+	perl -pi -e "s/0x71/0x88/;" sys.conf
+	perl -pi -e "s/18020/18820/;" sys.conf
+	perl -pi -e "s/0x71/0x88/;" actest.conf
+	perl -pi -e "s/0x71/0x88/;" mmdb.conf
+
+	cd ~/dev/OAM; jam; jam install
+
+	cd ~/dev/HLRSVC/SIM/actest; jam install
+	cd ~/dev/HLRSVC/SIM/simple; jam install
+	cd ~/dev/HLRSVC/SIM/; jam install
+
+
+
+#cd ~/dev/hlrhome/HLRHOME; makehlr
+
+#	cd ~/dev/HLRSVC; jam clean
+#	cd ~/dev/UALIB;  jam clean
+#	cd ~/dev/UANGIN;  jam clean
+#	cd ~/dev/OAM; jam; jam install

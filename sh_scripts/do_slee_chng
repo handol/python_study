@@ -1,0 +1,46 @@
+#!/usr/bin/csh
+
+set path = (/opt/rational/clearcase/bin $path)
+
+set tmpfile = /tmp/$user.xyz
+set dirs = (\
+	~/dahee_UAHLR_REL_0_6/hlrsvc/HLRSVC/src/slp/gsm\
+	~/dahee_UAHLR_REL_0_6/hlrsvc/HLRSVC/src/slp/gmap\
+	~/dahee_UAHLR_REL_0_6/hlrsvc/HLRSVC/src/dbserv/hlrdb\
+	)
+
+
+foreach dir ($dirs)
+echo "==== DIR " $dir "  ====="
+foreach i ($dir/*.c) 
+	set df=`grep SLEE_INFO $i | wc -l`
+	if ( $df == "0" ) then
+		set df=`grep -E 'SLEE_trace|SLEE_wait|SLEE_tsend|SLEE_trecv|SLEE_dsend|SLEE_drecv' $i | wc -l`
+		if ( $df != "0" ) then
+			echo $i " --- needs SLEE_INFO"
+		endif
+	endif
+end
+end
+
+exit
+
+foreach i ($CT/*.c) 
+	set df=`grep SLEE_INFO $i | wc -l`
+
+	if ( $df == "0" ) then
+		echo -n $i " --- "
+
+		sed -f slee_chng.sed $i >! $tmpfile
+		set df2=`diff $i $tmpfile|wc -l`
+		if ( $df2 != "0" ) then
+			echo " Update "
+			cleartool co -c "SLEE_INFO" $i
+			/bin/cp $tmpfile $i
+			cleartool ci -nc $i
+		else
+			echo " Skip "
+		endif
+	endif
+end
+

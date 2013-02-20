@@ -1,0 +1,17 @@
+#!/bin/csh
+cd ~/hlrhome
+pwd
+
+echo "starts -- " `date`
+
+foreach d (data bin slp lib)
+	date
+	echo "###### :: " $d
+	echo "---- tarring...."
+	tar cf $d.tar $d/* 
+	echo "---- compressing...."
+	compress $d.tar
+end
+
+echo "ends -- " `date`
+

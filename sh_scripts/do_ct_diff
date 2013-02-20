@@ -1,0 +1,34 @@
+#!/usr/local/bin/tcsh
+
+#if ($#argv != 1) then
+#	echo "usage: $0 comment"
+#	exit
+#endif
+
+#echo "$argv[0] $argv[1]"
+echo $0 $1
+
+set files =  `grep -v "#" ~/script/do_myfiles`
+
+set tmpfile=/tmp/$user.cvs2ct
+cat /dev/null > $tmpfile
+
+set CT=~/dev/hlrsvc/HLRSVC/
+set CT_INT=~/dahee_UAHLR_REL_0_7_int/hlrsvc/HLRSVC/
+
+foreach i ($files)
+		set df = `diff  $CT$i $CT_INT$i | wc -l`
+		#echo "df = " $df
+		echo $i " --- " $df
+
+		if ( $df != "0" ) then
+		echo $i >> $tmpfile
+		endif
+end
+
+set files=`cat $tmpfile`
+
+
+echo "=== Files"
+echo $files
+

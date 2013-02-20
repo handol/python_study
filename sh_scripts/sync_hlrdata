@@ -1,0 +1,24 @@
+#!/bin/csh
+
+cd ~/hlr/data
+pwd
+/bin/cp -p sys.conf sys.conf.dahee
+/bin/cp -p slp.conf slp.conf.dahee
+/bin/cp -p mmdb.conf mmdb.conf.dahee
+chmod -R u+w *
+
+cd ~/dev/hlrhome/HLRHOME/data
+pwd
+
+/bin/cp -rp * ~/hlr/data
+
+
+cd ~/hlr/data
+pwd
+chmod -R u+w *.conf
+/bin/cp -p sys.conf sys.conf.new
+/bin/cp -p slp.conf slp.conf.new
+/bin/cp -p mmdb.conf mmdb.conf.new
+/bin/cp -p sys.conf.dahee sys.conf
+/bin/cp -p slp.conf.dahee slp.conf
+/bin/cp -p mmdb.conf.dahee mmdb.conf

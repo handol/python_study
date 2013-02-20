@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+
+import sys
+import syncdir
+
+arglen=len(sys.argv);
+if arglen < 3:
+	print """
+Usage : syncdir [dir from] [dir to] 
+        ex) mklinks ~/HLRHOME/data ~/hlr/data
+"""
+	sys.exit();
+
+
+o_recursive = 1
+o_files = "*"
+o_files = "*.c,*.h,*.py,*.script,Jamfile"
+if arglen > 3 :
+	o_files = sys.argv[3]
+
+dfrom = sys.argv[1]
+dto = sys.argv[2]
+
+	
+report = syncdir.syncDir( dfrom , dto, o_files,  recursive = o_recursive )
+print 
+print "    skip/New/Update - " + str( report )
+
+
+

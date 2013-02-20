@@ -1,0 +1,3 @@
+#!/usr/bin/csh
+touch ~/aaa
+echo "aaaa" >> ~/aaa

@@ -1,0 +1,25 @@
+#!/usr/bin/csh
+
+set path = (/opt/rational/clearcase/bin $path)
+
+set files =  `cleartool lsco -cview -short -all`
+
+foreach i ($files)
+	echo "commit::" $i
+end
+echo
+
+echo "Enter [y/n]"
+set a = $<
+
+if ( $a == "y" ) then
+	foreach i ($files) 
+	echo $i
+		if ($#argv != 1) then
+			cleartool ci -nc $i 
+		else
+			cleartool ci -c $1 $i 
+		endif
+	end
+endif
+

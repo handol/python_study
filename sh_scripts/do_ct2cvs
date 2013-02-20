@@ -1,0 +1,31 @@
+#!/usr/bin/csh
+
+set files =  `grep -v "#" ~/script/do_myfiles`
+
+set CT=~/dev/HLRSVC/
+set CVS=~/CVS/HLRSVC/
+
+echo source=$CT target=$CVS
+
+#echo "enter any key..."
+#read a
+
+foreach i ($files) 
+	echo -n $i " --- "
+	set df=`diff  $CT$i $CVS$i | wc -l`
+
+	if ( $df == "0" ) then
+	echo " Identical"
+	else 
+		echo -n " Enter [y/n] "
+		set a = $<
+		#if ( $a == "y") echo /bin/cp  $CT$i $CVS$i
+		if ( $a == "y") then
+		/bin/cp  $CT$i $CVS$i
+		echo "***" $i " copied from ClearCase to CVS"
+		else
+		echo "skipped" $i
+		endif
+	endif
+end
+

@@ -1,0 +1,31 @@
+#!/usr/bin/csh
+
+set files =  `grep -v "#" ~/script/do_myfiles`
+
+set TRG=~/dev/HLRSVC/
+set SRC=~/CVS/HLRSVC/
+
+echo source=$SRC target=$TRG
+
+#echo "enter any key..."
+#read a
+
+foreach i ($files) 
+	echo -n $i " --- "
+	set df=`diff  $TRG$i $SRC$i | wc -l`
+
+	if ( $df == "0" ) then
+	echo " Identical"
+	else 
+		echo -n " Enter [y/n] "
+		set a = $<
+		#if ( $a == "y") echo /bin/cp  $CT$i $CVS$i
+		if ( $a == "y") then
+		/bin/cp  $SRC$i $TRG$i
+		echo "***" $i " copied from PC to CVS server"
+		else
+		echo "skipped" $i
+		endif
+	endif
+end
+

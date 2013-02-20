@@ -1,0 +1,38 @@
+#!/usr/bin/csh
+
+
+set path = ($path /opt/rational/clearcase/bin)
+
+cleartool setview dahee_UAHLR
+cleartool setact mk_gsm_map
+
+cd ~/dahee_UAHLR_REL_0_6/hlrsvc/HLRSVC/
+cd ~/dahee_UAHLR_REL_0_6/hlrsvc/HLRSVC/src/slp/gsm
+cleartool co -nc slp_code_sri*.c
+cleartool co -nc slp_code_sri*.h
+cleartool co -nc slp_util2.c
+
+cd ~/dahee_UAHLR_REL_0_6/hlrsvc/HLRSVC/src/dbserv/hlrdb
+cleartool co -nc sri_gsm_sleeapi.c
+
+cd ~/dahee_UAHLR_REL_0_6/hlrsvc/HLRSVC/include
+cleartool co -nc gsm*.h
+
+set a = (\
+src/slp/gsm/slp_code_sri_gsm.c \
+src/slp/gsm/slp_code_sri_gsm.h \
+src/slp/gsm/slp_code_sri_gsm_utils.c \
+src/slp/gsm/slp_code_sri_gsm_intw.c \
+src/slp/gsm/slp_gmap_intw.c \
+src/slp/gsm/slp_util2.c \
+src/slp/gsm/slp_code_sri_gsm.c \
+src/dbserv/hlrdb/sri_gsm_sleeapi.c \
+include/gsm*.h
+		)
+
+cd ~/dahee_UAHLR_REL_0_6/hlrsvc/HLRSVC/
+foreach i ($a) 
+echo $i
+/bin/cp ~/HLRSVC/$i $i
+end
+#ct co $file -nc

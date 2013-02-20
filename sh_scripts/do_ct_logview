@@ -1,0 +1,26 @@
+#!/usr/bin/csh
+
+
+set path = (/opt/rational/clearcase/bin $path)
+
+set tmpfile = /tmp/dahee_cvs
+cat /dev/null > $tmpfile
+
+# after finding all 'Jamfile', look into cvs log search for 'dahee'
+foreach start (~/dev/hlrsvc/HLRSVC ~/dev/uangin/UANGIN ~/dev/ualib/UALIB)
+	echo >> $tmpfile
+	echo "@@@@@@@" $start >> $tmpfile 
+	set files = `find  $start -name Jamrules -print`
+	#echo $files
+
+	foreach i ($files) 
+		echo $i
+		set fname = `basename $i`
+		set dname = `dirname $i`
+		echo "====== " $i >> $tmpfile
+		cd $dname
+		cleartool lsh $fname | head -n 4 >> $tmpfile
+	end
+end
+
+echo "-->" $tmpfile

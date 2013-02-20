@@ -1,0 +1,20 @@
+#!/usr/bin/csh
+
+set files =  `grep -v "#" ~/script/do_myfiles`
+
+
+cat /dev/null >! CheckOut
+echo cd ~/dahee_UAHLR_REL_0_6/hlrsvc/HLRSVC/ >> CheckOut
+pwd
+foreach i ($files) 
+echo $i
+echo co -nc $i  >> CheckOut
+end
+
+cat /dev/null >! CheckIn
+echo cd ~/dahee_UAHLR_REL_0_6/hlrsvc/HLRSVC/ >> CheckIn
+pwd
+foreach i ($files) 
+echo $i
+echo ci -c SvcReq $i  >> CheckIn
+end

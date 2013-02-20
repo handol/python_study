@@ -1,0 +1,18 @@
+#!/usr/bin/csh
+	setenv DATE `date '+%m%d'`;\
+	setenv FILENAME `pwd`/hlrpkgsrc${DATE}.tar;\
+	echo " make tar file : "${FILENAME}
+
+	setenv VOB /data1/snapshot/hlr_UAHLR_REL_0_7
+
+	pushd $VOB 
+
+	rm $FILENAME
+	find ualib \( -name "*.[yl]" -o -name "*.script" -o -name "*.[ch]" -o -name "[mM]akefile*" -o -name "*.mk" -o -name "*.py" -o -name "*.sch" -o -name "*.p" -o -name "*.tmpl" -name "libhistory.a" -name "libreadline.a" -name "libosstoed.so" -name "*-sed" -o -name "*.csh" -o -name "*.sh" -o -name "*Jam*" \) -exec /usr/local/bin/tar uvf ${FILENAME} {} \;
+	find uangin \( -name "*.[yl]" -o -name "*.script" -o -name "*.[ch]" -o -name "[mM]akefile*" -o -name "*.mk" -o -name "*.py" -o -name "*.sch" -o -name "*.p" -o -name "*.tmpl" -name "libhistory.a" -name "libreadline.a" -name "libosstoed.so" -name "*-sed" -o -name "*.csh" -o -name "*.sh" -o -name "*Jam*" \) -exec /usr/local/bin/tar uvf ${FILENAME} {} \;
+	find hlrsvc \( -name "*.[yl]" -o -name "*.script" -o -name "*.[ch]" -o -name "[mM]akefile*" -o -name "*.mk" -o -name "*.py" -o -name "*.sch" -o -name "*.p" -o -name "*.tmpl" -name "libhistory.a" -name "libreadline.a" -name "libosstoed.so" -name "*-sed" -o -name "*.csh" -o -name "*.sh" -o -name "*Jam*" \) -exec /usr/local/bin/tar uvf ${FILENAME} {} \;
+	find oam \( -name "*.[yl]" -o -name "*.script" -o -name "*.[ch]" -o -name "[mM]akefile*" -o -name "*.mk" -o -name "*.py" -o -name "*.sch" -o -name "*.p" -o -name "*.tmpl" -name "libhistory.a" -name "libreadline.a" -name "libosstoed.so" -name "*-sed" -o -name "*.csh" -o -name "*.sh" -o -name "*Jam*" \) -exec /usr/local/bin/tar uvf ${FILENAME} {} \;
+	popd
+
+	gzip ${FILENAME}
+	echo "done."

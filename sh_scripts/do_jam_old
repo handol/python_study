@@ -1,0 +1,71 @@
+#!/bin/csh
+#SHELL=/usr/bin/csh
+	cd ~/dev/HLRSVC/libsrc/schema; jam ; \cp -p db_server*.c ~/dev/HLRSVC/src/dbserv/hlrdb 
+	cd ~/dev/HLRSVC/libsrc/schema; jam ; \cp -p db_header*.h ~/dev/HLRSVC/include
+
+	cd ~/dev/HLRSVC/libsrc/;  jam;  jam install
+	cd ~/dev/UALIB/src/MMDB; jam; jam install
+	cd ~/dev/HLRSVC/libsrc/hlrdb; jam ; jam install
+
+	cd ~/dev/UALIB/src; jam install 
+	cd ~/dev/UALIB; jam install 
+
+	cd  ~/dev/HLRSVC/src/dbserv/hlrdb; jam ; jam install
+
+	sleep 1
+	cd ~/dev/UANGIN/src/pcb; jam 
+	cd ~/dev/UANGIN/src/pcb; ./opdata 
+	cd ~/dev/UANGIN/src/pcb; /bin/cp -p *.acn *.dat *.err ~/hlr/data
+	cd ~/dev/UANGIN/src/pcb; /bin/cp -p *.acn *.dat *.err ~/dev/HLRHOME/data
+	sleep 1
+	cd ~/dev/UANGIN/src/slee; jam
+	cd ~/dev/UANGIN/src/slee; jam install
+	sleep 1
+	cd ~/dev/UANGIN/src/; jam install
+	cd ~/dev/UANGIN/src/; jam install
+	cd ~/dev/UANGIN; jam install
+
+
+
+
+	cd  ~/dev/HLRSVC/src/slp/gsm_call; jam 
+	cd  ~/dev/HLRSVC/src/slp/gsm_call; jam install
+
+	cd  ~/dev/HLRSVC/src/slp/gsm_locu; jam 
+	cd  ~/dev/HLRSVC/src/slp/gsm_locu; jam install
+
+	cd  ~/dev/HLRSVC/src/slp/gsm_auth; jam 
+	cd  ~/dev/HLRSVC/src/slp/gsm_auth; jam install
+
+	cd  ~/dev/HLRSVC/src/slp/gsm; jam  install
+	cd  ~/dev/HLRSVC/src/slp/gmap; jam  install
+
+	cd  ~/dev/HLRSVC/src/slp/; jam 
+	cd  ~/dev/HLRSVC/src/slp/; jam install
+
+	cd  ~/dev/HLRSVC/src/slp/; jam 
+	cd  ~/dev/HLRSVC/src/slp/; jam install
+
+	cd  ~/dev/HLRSVC/src/ne/tiisib; jam 
+	cd  ~/dev/HLRSVC/src/ne/tiisib; jam install
+
+	cd ~/dev/HLRSVC; jam install
+
+
+
+	cd ~/dev/OAM; jam; jam install
+#cd ~/dev/hlrhom/HLRHOME/data/MML_INFO; /bin/cp -p * ~/dev/hlr/data/MML_INFO
+
+
+	cd ~/dev/HLRSVC/SIM/actest; jam install
+	cd ~/dev/HLRSVC/SIM/simple; jam install
+	cd ~/dev/HLRSVC/SIM/; jam install
+
+
+
+#cd ~/dev/hlrhome/HLRHOME; makehlr
+
+#	cd ~/dev/HLRSVC; jam clean
+#	cd ~/dev/UALIB;  jam clean
+#	cd ~/dev/UANGIN;  jam clean
+#	cd ~/dev/OAM; jam; jam install

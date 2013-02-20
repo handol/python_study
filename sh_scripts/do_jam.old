@@ -1,0 +1,49 @@
+#!/usr/local/bin/tcsh
+
+	cd /home/dahee/dev/ualib/UALIB/src/MMDB/util; jam; /bin/cp -p idbchk ~/hlr/bin 
+	cd /home/dahee/dev/ualib/UALIB/src/MMDB; jam; jam install 
+	cd /home/dahee/dev/ualib/UALIB/src; jam; jam install 
+	cd /home/dahee/dev/ualib/UALIB; jam; jam install 
+
+
+	cd /home/dahee/dev/uangin/UANGIN/src/pcb; jam 
+	cd /home/dahee/dev/uangin/UANGIN/src/pcb; jam install
+	cd /home/dahee/dev/uangin/UANGIN/src/pcb; ./opdata 
+	cd /home/dahee/dev/uangin/UANGIN/src/pcb; /bin/cp -p *.acn *.dat *.err ~/hlr/data
+
+	cd /home/dahee/dev/uangin/UANGIN/src/slee; jam
+	cd /home/dahee/dev/uangin/UANGIN/src/slee; jam install
+
+	cd /home/dahee/dev/uangin/UANGIN; jam; jam install
+
+
+	cd /home/dahee/dev/hlrsvc/HLRSVC/libsrc/hlrdb; jam ; jam install
+
+
+	cd /home/dahee/dev/hlrsvc/HLRSVC/libsrc/schema; jam ; 
+	\cp -p db_header*.h /home/dahee/dev/hlrsvc/HLRSVC/include
+	\cp -p db_server*.c /home/dahee/dev/hlrsvc/HLRSVC/src/dbserv/hlrdb
+	cd  /home/dahee/dev/hlrsvc/HLRSVC/src/dbserv/hlrdb; jam ; jam install
+
+	cd  /home/dahee/dev/hlrsvc/HLRSVC/src/slp/gsm; jam 
+	cd  /home/dahee/dev/hlrsvc/HLRSVC/src/slp/gsm_call; jam 
+	cd  /home/dahee/dev/hlrsvc/HLRSVC/src/slp/gsm_call; jam install
+	cd /home/dahee/dev/hlrsvc/HLRSVC; jam; jam install
+
+
+
+	cd /home/dahee/dev/oam/OAM; jam; jam install
+	cd /home/dahee/dev/hlrhom/HLRHOME/data/MML_INFO; /bin/cp -p * ~/hlr/data/MML_INFO/
+
+
+	cd /home/dahee/dev/hlrsvc/HLRSVC/SIM/actest; jam; jam install
+	cd /home/dahee/dev/hlrsvc/HLRSVC/SIM/simple; jam; jam install
+
+
+
+#cd /home/dahee/dev/hlrhome/HLRHOME; makehlr
+
+#	cd /home/dahee/dev/hlrsvc/HLRSVC; jam clean
+#	cd /home/dahee/dev/ualib/UALIB;  jam clean
+#	cd /home/dahee/dev/uangin/UANGIN;  jam clean
+#	cd /home/dahee/dev/oam/OAM; jam; jam install

@@ -1,0 +1,46 @@
+#!/usr/bin/csh
+
+set path = ($path /opt/rational/clearcase/bin)
+
+set files = (\
+src/slp/gsm/slp_pagereq.c \
+src/slp/gsm/slp_svcreq.c \
+src/slp/gsm/slp_code_sri_gsm.c \
+src/slp/gsm/slp_code_sri_gsm.h \
+src/slp/gsm/slp_code_sri_gsm_utils.c \
+src/slp/gsm/slp_code_sri_gsm_intw.c \
+src/slp/gsm/slp_gmap_intw.c \
+src/slp/gsm/slp_util2.c \
+src/dbserv/hlrdb/sri_gsm_sleeapi.c \
+src/dbserv/hlrdb/init_dbfunc.c \
+include/gsm_db.h \
+include/gsm_dbdef.h \
+		)
+
+set files = `grep -v "#" ~/script/do_myfiles`
+
+set CT=/home/dahee/dahee_UAHLR_1~/dahee_UAHLR_REL_0_6/hlrsvc/HLRSVC/
+set CT=/home/dahee/dev/hlrsvc/HLRSVC/
+set CT=/home/dahee/dev/HLRSVC/
+
+set DD = `/bin/date +%m%d-%H%M`
+set logfile = ~/.log/diff.$DD
+
+foreach i ($files) 
+echo -n $i " ---------- " 
+diff ~/CVS/HLRSVC/$i $CT$i | wc
+#wc ~/dahee_UAHLR_REL_0_6/hlrsvc/HLRSVC/$i ~/HLRSVC/$i
+echo
+end
+
+cat /dev/null > $logfile
+echo "#########" ~/CVS/HLRSVC "vs."  $CT >> $logfile
+foreach i ($files) 
+echo "####" $i >> $logfile
+#echo "-----------------------" >> $logfile
+diff ~/CVS/HLRSVC/$i $CT$i >> $logfile
+echo " ">> $logfile
+end
+
+echo ''
+echo 'LOG ====>  ' $logfile

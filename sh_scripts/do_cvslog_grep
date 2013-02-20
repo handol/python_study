@@ -1,0 +1,30 @@
+#!/usr/bin/csh
+
+set start = ~/HLRSVC
+set start = ~/UANGIN
+set files = `find  $start -name Jamfile -print`
+echo $files
+
+# after finding all 'Jamfile', look into cvs log search for 'dahee'
+set tmpfile = /tmp/dahee_cvs
+foreach i ($files) 
+	set fname = `basename $i`
+	set dname = `dirname $i`
+	echo "====== " $i >> $tmpfile
+	cd $dname
+	cvs log $fname | grep dahee >> $tmpfile
+end
+
+
+# after finding all 'Jamrules', look into cvs log search for 'dahee'
+set files = `find  $start -name Jamrules -print`
+echo $files
+
+set tmpfile = /tmp/dahee_cvs
+foreach i ($files) 
+	set fname = `basename $i`
+	set dname = `dirname $i`
+	echo "====== " $i >> $tmpfile
+	cd $dname
+	cvs log $fname | grep dahee >> $tmpfile
+end

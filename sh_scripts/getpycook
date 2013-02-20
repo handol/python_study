@@ -1,0 +1,5 @@
+#!/bin/csh
+wget -O $1 http://209.17.179.99/ASPN/Cookbook/Python/Recipe/$2/index_txt
+perl -pi -e "s/\r//;" $1
+~
+

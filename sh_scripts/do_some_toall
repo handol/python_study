@@ -1,0 +1,14 @@
+#!/bin/csh
+
+set top=~/HLRSVC
+set file="\*.[ch]"
+
+#set list=`find $top -name "*.[ch]" -print`
+set list=`find . -name "*.[ao]" -print`
+echo $list
+foreach i ($list)
+	echo $i
+	$1 $i
+end
+
+

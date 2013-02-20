@@ -1,0 +1,7 @@
+#!/usr/bin/csh
+set DD=`/bin/date +%Y%m%d-%H%M%S`
+echo "Now I am compiling ... "
+echo "Use 'tail -f LogOfCompiling/compile.log.$DD'  to see the progress.'"
+~/script/do_jam >& LogOfCompiling/compile.log.$DD
+
+

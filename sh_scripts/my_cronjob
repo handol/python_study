@@ -1,0 +1,9 @@
+#!/usr/bin/csh
+
+~/script/do_cvu >& /dev/null
+
+~/script/maketag >& /dev/null
+
+~/script/do_compile >& /dev/null
+
+

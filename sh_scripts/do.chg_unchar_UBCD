@@ -1,0 +1,5 @@
+#!/bin/csh
+foreach i (*.[ch])
+	echo $i
+chg_unchar_UBCD $i doit
+end

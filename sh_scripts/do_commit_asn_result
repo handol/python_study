@@ -1,0 +1,74 @@
+#!/usr/local/bin/tcsh
+
+if ($#argv != 1) then
+	echo "usage: $0 comment"
+	exit
+endif
+
+#echo "$argv[0] $argv[1]"
+echo $0 $1
+
+
+
+set H_DEST=~/dev/uangin/UANGIN/include/hlr/
+set C_DEST=~/dev/uangin/UANGIN/src/pcb/hlr/
+
+set ASN=~/dev/asn/ASN/HLR/
+
+echo "cd " $ASN
+cd $ASN
+pwd
+
+set cfiles =  `/bin/ls *.c`
+set hfiles =  `/bin/ls *.h`
+
+echo "=== C Files"
+echo $cfiles
+echo " "
+echo "=== H Files"
+echo $hfiles
+
+
+echo " "
+echo -n "Enter any key to continue..."
+set a = $<
+echo " "
+
+set path = (/opt/rational/clearcase/bin $path)
+
+foreach i ($hfiles) 
+	echo -n $i " --- "
+	set df=`diff  $ASN$i $H_DEST$i | wc -l`
+
+	if ( $df == "0" ) then
+		echo " Identical"
+	else
+		echo "=== Check Out"
+		cleartool co -c $1 $H_DEST$i
+
+		echo $ASN$i "-->" $H_DEST$i
+		/bin/cp  $ASN$i $H_DEST$i
+
+		echo "=== Check In"
+		cleartool ci -nc $H_DEST$i
+	endif
+end
+
+foreach i ($cfiles) 
+
+	echo -n $i " --- "
+	set df=`diff  $ASN$i $C_DEST$i | wc -l`
+
+	if ( $df == "0" ) then
+		echo " Identical"
+	else
+		echo "=== Check Out"
+		cleartool co -c $1 $C_DEST$i
+
+		echo $ASN$i "-->" $C_DEST$i
+		/bin/cp  $ASN$i $C_DEST$i
+
+		echo "=== Check In"
+		cleartool ci -nc $C_DEST$i
+	endif
+end

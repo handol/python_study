@@ -1,0 +1,5 @@
+#!/bin/csh
+@ n = $2 - 1
+cvs diff -r 1.$n -r 1.$2 $1 
+echo ""
+echo "=== Compare 1.$n 1.$2 : $1 ==="

@@ -1,0 +1,16 @@
+#!/bin/csh
+## Only root can run this script
+cd ~skt/hlrhome/bin/
+chown root startmc killmc dismc samd
+chmod u+xs startmc killmc dismc samd
+
+set libfiles = (libtrc_lib.so libsys_lib.so libmmif_lib.so libstat_lib.so libua_common.so)
+
+foreach i ($libfiles)
+	echo $i
+	set src = ~skt/hlrhome/lib/$i
+	#echo $src
+	/bin/ls -l  $src
+	/bin/ls -l  /usr/lib/$i
+	/bin/ln -s  $src /usr/lib/$i
+end

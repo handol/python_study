@@ -1,0 +1,16 @@
+#!/usr/bin/csh
+
+set start = ~/HLRSVC
+set start = ~/CVS
+set files = `find  $start -name Root -print`
+echo $files
+
+set tmpfile = /tmp/dahee_cvs
+foreach i ($files) 
+	#sed 's/cvsroot_red/cvsroot_white/g' $i >! $tmpfile
+	#echo $i  `cat $tmpfile`
+	#/bin/cp $tmpfile $i
+	perl -pi -e "s/cvsroot_red/cvsroot_white/g;" $i
+end
+
+/bin/rm $tmpfile
